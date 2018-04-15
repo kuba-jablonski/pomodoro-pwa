@@ -2,13 +2,13 @@
   <div class="settings-control">
     <button @click="$emit('change', value - 60)" :disabled="value <= min" class="settings-control__btn">
       <svg class="settings-control__icon">
-        <use xlink:href="/static/sprite.svg#icon-chevron-thin-left"></use>
+        <use :xlink:href="`${baseUrl}sprite.svg#icon-chevron-thin-left`"></use>
       </svg>
     </button>
     <span class="settings-control__display">{{ value | secToMin }}</span>
     <button @click="$emit('change', value + 60)" :disabled="value >= max" class="settings-control__btn">
       <svg class="settings-control__icon">
-        <use xlink:href="/static/sprite.svg#icon-chevron-thin-right"></use>
+        <use :xlink:href="`${baseUrl}sprite.svg#icon-chevron-thin-right`"></use>
       </svg>
     </button>
   </div>
@@ -17,6 +17,11 @@
 <script>
 export default {
   props: ['value', 'min', 'max'],
+  data () {
+    return {
+      baseUrl: process.env.BASE_URL
+    }
+  },
   filters: {
     secToMin (value) {
       return value / 60

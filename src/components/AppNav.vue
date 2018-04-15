@@ -2,21 +2,31 @@
   <nav class="nav">
     <router-link to="/app" tag="a" class="nav__link">
       <svg class="nav__icon">
-        <use xlink:href="/assets/sprite.svg#icon-alarm"></use>
+        <use :xlink:href="`${baseUrl}sprite.svg#icon-alarm`"></use>
       </svg>
     </router-link>
     <router-link to="/app/settings" tag="a" class="nav__link">
       <svg class="nav__icon">
-        <use xlink:href="/static/sprite.svg#icon-cog"></use>
+        <use :xlink:href="`${baseUrl}sprite.svg#icon-cog`"></use>
       </svg>
     </router-link>
     <router-link to="/app/history" tag="a" class="nav__link">
       <svg class="nav__icon">
-        <use xlink:href="/static/sprite.svg#icon-history"></use>
+        <use :xlink:href="`${baseUrl}sprite.svg#icon-history`"></use>
       </svg>
     </router-link>
   </nav>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      baseUrl: process.env.BASE_URL
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .nav {
