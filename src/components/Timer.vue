@@ -1,5 +1,5 @@
 <template>
-  <div class="timer" :class="{'timer--landscape': landscape}">
+  <div class="timer">
     <timer-input/>
     <div class="progress">
       <div class="progress__canvas" ref="progress"/>
@@ -21,28 +21,9 @@ export default {
     TimerHistory,
     TimerInput
   },
-  data () {
-    return {
-      landscape: false
-    }
-  },
-  methods: {
-    checkOrientation () {
-      if (window.innerWidth > window.innerHeight) {
-        this.landscape = true
-      } else {
-        this.landscape = false
-      }
-    }
-  },
   mounted () {
     this.$store.commit('SET_CANVAS_CONTAINER', this.$refs.progress)
     this.$store.commit('DRAW_TIMER')
-    this.checkOrientation()
-    window.addEventListener('resize', this.checkOrientation)
-  },
-  destroyed () {
-    window.removeEventListener('resize', this.checkOrientation)
   }
 }
 </script>

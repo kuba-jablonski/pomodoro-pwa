@@ -1,5 +1,5 @@
 <template>
-  <overdrive id="element" :duration="200">
+  <overdrive class="app-container" id="element" :duration="200">
     <div class="app">
       <AppNav/>
       <!-- <keep-alive include="timer"> -->
@@ -22,10 +22,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-container {
+  height: 100%;
+}
+
 .app {
+  height: 100%;
   background-color: $color-primary;
-  height: 100vh;
-  width: 100%;
 
   display: grid;
   grid-template-rows: 5rem 1fr;
