@@ -43,6 +43,7 @@ export default {
   max-width: 35rem;
   width: 90%;
   background-color: transparent;
+  margin: 2rem 0;
 }
 
 .timer--landscape {

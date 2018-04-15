@@ -7,30 +7,9 @@
         <span>Timer</span>
       </h1>
     </div>
-    <overdrive id="element" :duration="200">
-      <router-link :style="style" to="/app" tag="a" class="btn">Button</router-link>
-    </overdrive>
+    <router-link to="/app" tag="a" class="btn">Button</router-link>
   </div>
 </template>
-
-<script>
-// import tomato from '@/assets/tomato.svg'
-// import HelloWorld from "@/components/HelloWorld.vue";
-
-export default {
-  data () {
-    return {
-      style: ''
-    }
-  },
-  beforeRouteLeave (to, from, next) {
-    this.style = 'color: transparent;'
-    setTimeout(() => {
-      next()
-    }, 10)
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 

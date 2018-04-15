@@ -1,12 +1,10 @@
 <template>
-  <overdrive class="app-container" id="element" :duration="200">
     <div class="app">
       <AppNav/>
       <!-- <keep-alive include="timer"> -->
         <router-view/>
       <!-- </keep-alive> -->
     </div>
-  </overdrive>
 </template>
 
 <script>

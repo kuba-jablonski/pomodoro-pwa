@@ -1,11 +1,17 @@
 <template>
   <div class="settings">
-    <p>Session Timer:</p>
-    <settings-control @change="SET_SESSION_DURATION" :value="sessionTimer" :min="sessionMin" :max="sessionMax"/>
-    <p>Short Break Timer:</p>
-    <settings-control @change="SET_BREAK_DURATION" :value="breakTimer" :min="breakMin" :max="breakMax"/>
-    <p>Long Break Timer</p>
-    <settings-control @change="SET_LONG_BREAK_DURATION" :value="longBreakTimer" :min="longBreakMin" :max="longBreakMax"/>
+    <div class="settings__element">
+      <h2 class="settings__name">Session</h2>
+      <settings-control @change="SET_SESSION_DURATION" :value="sessionTimer" :min="sessionMin" :max="sessionMax"/>
+    </div>
+    <div class="settings__element">
+      <h2 class="settings__name">Short Break</h2>
+      <settings-control @change="SET_BREAK_DURATION" :value="breakTimer" :min="breakMin" :max="breakMax"/>
+    </div>
+    <div class="settings__element">
+      <h2 class="settings__name">Long Break</h2>
+      <settings-control @change="SET_LONG_BREAK_DURATION" :value="longBreakTimer" :min="longBreakMin" :max="longBreakMax"/>
+    </div>
   </div>
 </template>
 
@@ -43,3 +49,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__element {
+    margin-top: 5rem;
+  }
+
+  &__name {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: -1.5rem;
+  }
+}
+</style>
