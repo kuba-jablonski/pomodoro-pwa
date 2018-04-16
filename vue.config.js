@@ -24,5 +24,14 @@ module.exports = {
       .options({
         resources: path.resolve('./src/sass/_variables.scss')
       })
+  },
+
+  pwa: {
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      // swSrc is required in InjectManifest mode.
+      swSrc: 'dev/service-worker.js'
+      // ...other Workbox options...
+    }
   }
 }
