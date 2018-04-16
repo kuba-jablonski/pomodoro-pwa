@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import history from './history'
 import ProgressBar from 'progressbar.js'
 
 Vue.use(Vuex)
@@ -23,9 +22,9 @@ function convertSecsToTimerString (secs) {
 export default new Vuex.Store({
   state: {
     activeTimer: 'sessionTimer',
-    sessionTimer: 1500, // 1500 = 25min
-    breakTimer: 300, // 300 = 5 min
-    longBreakTimer: 900,
+    sessionTimer: 2, // 1500 = 25min
+    breakTimer: 1, // 300 = 5 min
+    longBreakTimer: 3,
     secLeft: null,
     circle: null,
     progress: 0,
@@ -128,9 +127,6 @@ export default new Vuex.Store({
       }
 
       if (!state.interval) {
-        if (state.activeTimer === 'sessionTimer') {
-          commit('SET_START_TIME', Date.now())
-        }
         commit('CALCULATE_STEP')
         dispatch('activateTimer')
 
@@ -142,14 +138,12 @@ export default new Vuex.Store({
           if (state.secLeft < 0) {
             commit('SET_INTERVAL', null)
             if (state.activeTimer === 'sessionTimer') {
-              commit('SET_END_TIME', Date.now())
               commit('SET_POMODORO_COUNT', state.pomodoroCount - 1)
               if (state.pomodoroCount > 0) {
                 commit('SET_ACTIVE_TIMER', 'breakTimer')
               } else {
                 commit('SET_ACTIVE_TIMER', 'longBreakTimer')
               }
-              commit('ADD_TO_POMODORO_HISTORY')
             } else if (state.activeTimer === 'breakTimer' || state.activeTimer === 'longBreakTimer') {
               commit('SET_ACTIVE_TIMER', 'sessionTimer')
             }
@@ -166,8 +160,6 @@ export default new Vuex.Store({
 
     resetTimer ({ commit, state }) {
       state.circle.destroy()
-      commit('ADD_POMODORO_TO_FULL_HISTORY')
-      commit('RESET_CURRENT_POMODORO_HISTORY')
       commit('SET_INTERVAL', null)
       commit('SET_PROGRESS', 0)
       commit('SET_PAUSE_STATE', null)
@@ -213,12 +205,19 @@ export default new Vuex.Store({
 
     isFreshTimer (state) {
       return state.paused === null
+    },
+
+    task (state) {
+      switch (state.activeTimer) {
+        case 'sessionTimer':
+          return 'Session'
+        case 'breakTimer':
+          return 'Short Break'
+        case 'longBreakTimer':
+          return 'Long Break'
+      }
     }
 
-  },
-
-  modules: {
-    history
   }
 
 })

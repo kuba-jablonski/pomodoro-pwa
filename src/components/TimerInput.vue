@@ -1,5 +1,5 @@
 <template>
-  <input @focus="maybeClearTask" @blur="maybeResetTask" class="input" type="text" v-model="task" :style="italicText">
+  <h2 class="task">{{ task }}</h2>
 </template>
 
 <script>
@@ -10,37 +10,15 @@ export default {
     }
   },
   computed: {
-    task: {
-      get () {
-        return this.$store.state.history.task
-      },
-      set (value) {
-        this.$store.commit('SET_TASK', value)
-      }
-    },
-    italicText () {
-      if (this.task === this.taskDefaultValue) {
-        return 'font-style: italic;'
-      }
-    }
-  },
-  methods: {
-    maybeResetTask () {
-      if (this.task.trim() === '') {
-        this.$store.commit('SET_TASK', this.taskDefaultValue)
-      }
-    },
-    maybeClearTask () {
-      if (this.task === this.taskDefaultValue) {
-        this.$store.commit('SET_TASK', '')
-      }
+    task () {
+      return this.$store.getters.task
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.input {
+.task {
   font-size: 2rem;
   background-color: transparent;
   border: none;

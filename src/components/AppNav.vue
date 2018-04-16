@@ -10,11 +10,6 @@
         <use :xlink:href="`${baseUrl}sprite.svg#icon-cog`"></use>
       </svg>
     </router-link>
-    <router-link to="/app/history" tag="a" class="nav__link">
-      <svg class="nav__icon">
-        <use :xlink:href="`${baseUrl}sprite.svg#icon-history`"></use>
-      </svg>
-    </router-link>
   </nav>
 </template>
 

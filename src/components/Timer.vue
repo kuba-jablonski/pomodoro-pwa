@@ -36,14 +36,14 @@ export default {
   grid-row-gap: 2rem;
   justify-items: center;
   align-items: end;
-  padding-top: 3rem;
+  padding-top: 2rem;
 }
 
 .progress {
   max-width: 35rem;
   width: 80%;
   background-color: transparent;
-  margin: 2rem 0;
+  // margin: 2rem 0;
 }
 
 .timer--landscape {

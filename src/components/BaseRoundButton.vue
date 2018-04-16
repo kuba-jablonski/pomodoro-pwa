@@ -10,8 +10,8 @@
   justify-content: center;
   align-items: center;
 
-  height: 7rem;
-  width: 7rem;
+  height: 6.5rem;
+  width: 6.5rem;
   border-radius: 50%;
   border: none;
   outline: none;
