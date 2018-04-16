@@ -22,9 +22,9 @@ function convertSecsToTimerString (secs) {
 export default new Vuex.Store({
   state: {
     activeTimer: 'sessionTimer',
-    sessionTimer: 2, // 1500 = 25min
-    breakTimer: 1, // 300 = 5 min
-    longBreakTimer: 3,
+    sessionTimer: 1500, // 1500 = 25min
+    breakTimer: 300, // 300 = 5 min
+    longBreakTimer: 900,
     secLeft: null,
     circle: null,
     progress: 0,
