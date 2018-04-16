@@ -11,7 +11,11 @@
 
 <style lang="scss" scoped>
 .container {
-  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   overflow: hidden;
+  background-color: $color-primary;
 }
 </style>

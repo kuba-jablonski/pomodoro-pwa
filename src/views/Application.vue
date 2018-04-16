@@ -25,7 +25,10 @@ export default {
 }
 
 .app {
-  height: 100%;
+  height: 100vh;
+  width: 100%;
+  max-height: 90rem;
+  max-width: 70rem;
   background-color: $color-primary;
 
   display: grid;
