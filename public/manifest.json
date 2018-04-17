@@ -1,6 +1,6 @@
 {
   "name": "pomodoro-pwa",
-  "short_name": "pomodoro-pwa",
+  "short_name": "PomPWA",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
