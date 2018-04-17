@@ -1,11 +1,11 @@
 <template>
   <nav class="nav">
-    <router-link to="/app" tag="a" class="nav__link">
+    <router-link to="/" tag="a" class="nav__link">
       <svg class="nav__icon">
         <use :xlink:href="`${baseUrl}sprite.svg#icon-alarm`"></use>
       </svg>
     </router-link>
-    <router-link to="/app/settings" tag="a" class="nav__link">
+    <router-link to="/settings" tag="a" class="nav__link">
       <svg class="nav__icon">
         <use :xlink:href="`${baseUrl}sprite.svg#icon-cog`"></use>
       </svg>
