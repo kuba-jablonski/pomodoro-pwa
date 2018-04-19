@@ -4,11 +4,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      taskDefaultValue: 'Set task...'
-    }
-  },
   computed: {
     task () {
       return this.$store.getters.task

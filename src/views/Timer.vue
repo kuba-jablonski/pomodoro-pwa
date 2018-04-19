@@ -1,6 +1,6 @@
 <template>
   <div class="timer">
-    <timer-input/>
+    <timer-title/>
     <div class="progress">
       <div class="progress__canvas" ref="progress"/>
     </div>
@@ -12,14 +12,14 @@
 <script>
 import TimerControls from './TimerControls'
 import TimerHistory from './TimerHistory'
-import TimerInput from './TimerInput'
+import TimerTitle from './TimerTitle'
 
 export default {
   name: 'timer',
   components: {
     TimerControls,
     TimerHistory,
-    TimerInput
+    TimerTitle
   },
   mounted () {
     this.$store.commit('SET_CANVAS_CONTAINER', this.$refs.progress)
@@ -43,7 +43,6 @@ export default {
   max-width: 35rem;
   width: 80%;
   background-color: transparent;
-  // margin: 2rem 0;
 }
 
 .timer--landscape {

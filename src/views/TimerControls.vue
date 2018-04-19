@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import BaseRoundButton from './BaseRoundButton'
+import BaseRoundButton from '@/components/BaseRoundButton'
 
 export default {
   components: {
