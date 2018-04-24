@@ -6,6 +6,8 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
+Notification.requestPermission()
+
 new Vue({
   router,
   store,

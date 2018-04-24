@@ -19,10 +19,30 @@ function convertSecsToTimerString (secs) {
   return `${min}:${secString}`
 }
 
+function displayNotification (activity) {
+  let body
+  switch (activity) {
+    case 'Session':
+      body = 'Time for a break!'
+      break
+    case 'Short Break':
+      body = 'Time to work!'
+      break
+    case 'Long Break':
+      body = 'Pomodoro finished!'
+      break
+  }
+  // eslint-disable-next-line
+  new Notification(`${activity} finished.`, {
+    body,
+    icon: `${process.env.BASE_URL}tomato.png`
+  })
+}
+
 export default new Vuex.Store({
   state: {
     activeTimer: 'sessionTimer',
-    sessionTimer: 1500, // 1500 = 25min
+    sessionTimer: 1, // 1500 = 25min
     breakTimer: 300, // 300 = 5 min
     longBreakTimer: 900,
     secLeft: null,
@@ -121,7 +141,7 @@ export default new Vuex.Store({
   },
 
   actions: {
-    animateTimer ({ commit, state, dispatch }) {
+    animateTimer ({ commit, state, dispatch, getters }) {
       if (state.pomodoroCount === 0 && state.activeTimer === 'sessionTimer') {
         return dispatch('resetTimer')
       }
@@ -136,6 +156,7 @@ export default new Vuex.Store({
           state.circle.setText(convertSecsToTimerString(state.secLeft + 1))
 
           if (state.secLeft < 0) {
+            displayNotification(getters.task)
             commit('SET_INTERVAL', null)
             if (state.activeTimer === 'sessionTimer') {
               commit('SET_POMODORO_COUNT', state.pomodoroCount - 1)
