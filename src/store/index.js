@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ProgressBar from 'progressbar.js'
+import audio from '../assets/audio1.mp3'
 
 Vue.use(Vuex)
 
@@ -33,7 +34,7 @@ function displayNotification (activity) {
       break
   }
   // eslint-disable-next-line
-  new Notification(`${activity} finished.`, {
+  new Notification(`${activity} ended.`, {
     body,
     icon: `${process.env.BASE_URL}tomato.png`
   })
@@ -42,9 +43,9 @@ function displayNotification (activity) {
 export default new Vuex.Store({
   state: {
     activeTimer: 'sessionTimer',
-    sessionTimer: 1, // 1500 = 25min
-    breakTimer: 300, // 300 = 5 min
-    longBreakTimer: 900,
+    sessionTimer: 1500, // 1500 = 25min
+    breakTimer: 300, // 300 = 5min
+    longBreakTimer: 900, // 900 = 15min
     secLeft: null,
     circle: null,
     progress: 0,
@@ -157,6 +158,8 @@ export default new Vuex.Store({
 
           if (state.secLeft < 0) {
             displayNotification(getters.task)
+            const sound = new Audio(audio)
+            sound.play()
             commit('SET_INTERVAL', null)
             if (state.activeTimer === 'sessionTimer') {
               commit('SET_POMODORO_COUNT', state.pomodoroCount - 1)
