@@ -53,7 +53,8 @@ export default new Vuex.Store({
     paused: null, // null is fresh timer
     step: null,
     canvasContainer: null,
-    pomodoroCount: 4
+    pomodoroCount: 4,
+    testMode: false
   },
 
   mutations: {
@@ -138,6 +139,10 @@ export default new Vuex.Store({
 
     SET_POMODORO_COUNT (state, value) {
       state.pomodoroCount = value
+    },
+
+    SET_TEST_MODE (state, value) {
+      state.testMode = value
     }
   },
 
@@ -210,6 +215,20 @@ export default new Vuex.Store({
     pauseTimer ({ commit }) {
       commit('SET_INTERVAL', null)
       commit('SET_PAUSE_STATE', true)
+    },
+
+    setTestMode ({ commit }, value) {
+      commit('SET_TEST_MODE', value)
+
+      if (value) {
+        commit('SET_SESSION_DURATION', 5)
+        commit('SET_BREAK_DURATION', 2)
+        commit('SET_LONG_BREAK_DURATION', 3)
+      } else {
+        commit('SET_SESSION_DURATION', 1500)
+        commit('SET_BREAK_DURATION', 300)
+        commit('SET_LONG_BREAK_DURATION', 900)
+      }
     }
   },
 
