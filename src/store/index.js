@@ -34,9 +34,11 @@ function displayNotification (activity) {
       break
   }
   // eslint-disable-next-line
-  new Notification(`${activity} ended.`, {
-    body,
-    icon: `${process.env.BASE_URL}tomato.png`
+  navigator.serviceWorker.ready.then(function(registration) {
+    registration.showNotification(`${activity} ended.`, {
+      body,
+      icon: `${process.env.BASE_URL}tomato.png`
+    })
   })
 }
 
@@ -156,34 +158,40 @@ export default new Vuex.Store({
         commit('CALCULATE_STEP')
         dispatch('activateTimer')
 
-        commit('SET_INTERVAL', setInterval(() => {
-          commit('SET_PROGRESS', state.progress + state.step)
-          commit('SET_TIME_LEFT', state.secLeft - 1)
-          state.circle.setText(convertSecsToTimerString(state.secLeft + 1))
+        commit(
+          'SET_INTERVAL',
+          setInterval(() => {
+            commit('SET_PROGRESS', state.progress + state.step)
+            commit('SET_TIME_LEFT', state.secLeft - 1)
+            state.circle.setText(convertSecsToTimerString(state.secLeft + 1))
 
-          if (state.secLeft < 0) {
-            displayNotification(getters.task)
-            const sound = new Audio(audio)
-            sound.play()
-            commit('SET_INTERVAL', null)
-            if (state.activeTimer === 'sessionTimer') {
-              commit('SET_POMODORO_COUNT', state.pomodoroCount - 1)
-              if (state.pomodoroCount > 0) {
-                commit('SET_ACTIVE_TIMER', 'breakTimer')
-              } else {
-                commit('SET_ACTIVE_TIMER', 'longBreakTimer')
+            if (state.secLeft < 0) {
+              displayNotification(getters.task)
+              const sound = new Audio(audio)
+              sound.play()
+              commit('SET_INTERVAL', null)
+              if (state.activeTimer === 'sessionTimer') {
+                commit('SET_POMODORO_COUNT', state.pomodoroCount - 1)
+                if (state.pomodoroCount > 0) {
+                  commit('SET_ACTIVE_TIMER', 'breakTimer')
+                } else {
+                  commit('SET_ACTIVE_TIMER', 'longBreakTimer')
+                }
+              } else if (
+                state.activeTimer === 'breakTimer' ||
+                state.activeTimer === 'longBreakTimer'
+              ) {
+                commit('SET_ACTIVE_TIMER', 'sessionTimer')
               }
-            } else if (state.activeTimer === 'breakTimer' || state.activeTimer === 'longBreakTimer') {
-              commit('SET_ACTIVE_TIMER', 'sessionTimer')
+
+              return dispatch('animateTimer')
             }
 
-            return dispatch('animateTimer')
-          }
-
-          state.circle.animate(state.progress, {
-            duration: 1000
-          })
-        }, 1000))
+            state.circle.animate(state.progress, {
+              duration: 1000
+            })
+          }, 1000)
+        )
       }
     },
 
@@ -260,7 +268,5 @@ export default new Vuex.Store({
           return 'Long Break'
       }
     }
-
   }
-
 })
