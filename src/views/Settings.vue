@@ -1,23 +1,52 @@
 <template>
   <div class="settings">
-    <div v-if="!testMode" class="settings__timers">
+    <div
+      v-if="!testMode"
+      class="settings__timers"
+    >
       <div class="settings__element">
         <h2 class="settings__name">Session</h2>
-        <settings-control @change="SET_SESSION_DURATION" :value="sessionTimer" :min="sessionMin" :max="sessionMax"/>
+        <settings-control
+          @change="SET_SESSION_DURATION"
+          :value="sessionTimer"
+          :min="sessionMin"
+          :max="sessionMax"
+        />
       </div>
       <div class="settings__element">
         <h2 class="settings__name">Short Break</h2>
-        <settings-control @change="SET_BREAK_DURATION" :value="breakTimer" :min="breakMin" :max="breakMax"/>
+        <settings-control
+          @change="SET_BREAK_DURATION"
+          :value="breakTimer"
+          :min="breakMin"
+          :max="breakMax"
+        />
       </div>
       <div class="settings__element">
         <h2 class="settings__name">Long Break</h2>
-        <settings-control @change="SET_LONG_BREAK_DURATION" :value="longBreakTimer" :min="longBreakMin" :max="longBreakMax"/>
+        <settings-control
+          @change="SET_LONG_BREAK_DURATION"
+          :value="longBreakTimer"
+          :min="longBreakMin"
+          :max="longBreakMax"
+        />
       </div>
     </div>
-    <p v-if="testMode" class="settings__text">Application is running in test mode with very short timers.</p>
+    <p
+      v-if="testMode"
+      class="settings__text"
+    >Application is running in test mode with very short timers.</p>
     <div class="settings__element">
-      <button v-if="!testMode" @click="$store.dispatch('setTestMode', true)" class="settings__button">Set test mode</button>
-      <button v-else @click="$store.dispatch('setTestMode', false)" class="settings__button">Quit test mode</button>
+      <button
+        v-if="!testMode"
+        @click="$store.dispatch('setTestMode', true)"
+        class="settings__button"
+      >Set test mode</button>
+      <button
+        v-else
+        @click="$store.dispatch('setTestMode', false)"
+        class="settings__button"
+      >Quit test mode</button>
     </div>
   </div>
 </template>
@@ -75,6 +104,8 @@ export default {
     color: #fff;
     font-size: 2rem;
     margin-top: 5rem;
+    padding: 0 2rem;
+    text-align: center;
   }
 
   &__name {
